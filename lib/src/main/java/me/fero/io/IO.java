@@ -31,7 +31,7 @@ public class IO {
             reader.close();
             return new Response(connection.getResponseCode(), builder.toString().trim());
         } catch (Exception e) {
-            return new Response(500, "Exception caught " + e.getMessage());
+            return new Response(1, "Exception caught " + e.getMessage());
         }
     }
 }

@@ -16,7 +16,6 @@ import org.json.simple.parser.ParseException;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
 
 
 public class OmdbJava {
@@ -73,10 +72,15 @@ public class OmdbJava {
             if(id != null) url += "&i=" + id;
 
             Response response = IO.request(url);
+            if(response.getCode() == 1) {
+                throw new ResponseError(response.getResponse());
+            }
+
             JSONObject jsonObject = (JSONObject) Config.parser.parse(response.getResponse());
 
             boolean responseCode = Boolean.parseBoolean(jsonObject.get("Response").toString());
             if(!responseCode) {
+
                 throw new ResponseError("Error " + jsonObject.get("Error").toString());
             }
 
