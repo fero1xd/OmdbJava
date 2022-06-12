@@ -58,7 +58,7 @@ Use the Release Section
 ```java
 import me.fero.OmdbJava;
 import me.fero.exceptions.ResponseError;
-import me.fero.objects.Movie;
+import me.fero.objects.movie.Movie;
 
 public class App {
     public static void main(String[] args) {
@@ -84,7 +84,7 @@ public class App {
 ```java
 import me.fero.OmdbJava;
 import me.fero.objects.Item;
-import me.fero.objects.Movie;
+import me.fero.objects.movie.Movie;
 
 public class App {
     public static void main(String[] args) {

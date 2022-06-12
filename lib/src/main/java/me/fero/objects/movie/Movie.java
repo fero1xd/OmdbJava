@@ -1,23 +1,31 @@
-package me.fero.objects;
+package me.fero.objects.movie;
 
 import me.fero.attributes.Type;
+import me.fero.objects.Item;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.ParseException;
 
-public class Series extends Item {
-    private final int totalSeasons;
+public class Movie extends Item {
 
-    public Series(JSONObject jsonObject) throws ParseException {
+    private final String boxOffice;
+
+    private final String website;
+
+    public Movie(JSONObject jsonObject) throws ParseException {
         super(jsonObject);
-        this.type = Type.SERIES;
-        this.totalSeasons = Integer.parseInt(jsonObject.get("totalSeasons").toString());
+        this.type = Type.MOVIE;
+        this.boxOffice = jsonObject.get("BoxOffice").toString();
+        this.website = jsonObject.get("Website").toString();
     }
 
-    public int getTotalSeasons() { return totalSeasons; }
+    public String getBoxOffice() { return boxOffice; }
+
+
+    public String getWebsite() { return website;}
 
     @Override
     public String toString() {
-        return "Series{" +
+        return "Movie{" +
                 "title='" + title + '\'' +
                 ", year='" + year + '\'' +
                 ", rated='" + rated + '\'' +
@@ -37,7 +45,8 @@ public class Series extends Item {
                 ", plot='" + plot + '\'' +
                 ", poster='" + poster + '\'' +
                 ", type=" + type +
-                ", totalSeasons=" + totalSeasons +
+                ", boxOffice='" + boxOffice + '\'' +
+                ", website='" + website + '\'' +
                 '}';
     }
 }

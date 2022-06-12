@@ -3,7 +3,8 @@ package me.fero.attributes;
 public enum Type {
     MOVIE("movie"),
     SERIES("series"),
-    EPISODE("episode");
+    EPISODE("episode"),
+    SEASON("season");
 
     private final String name;
     private Type(String name) {
