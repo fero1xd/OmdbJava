@@ -1,6 +1,6 @@
 ![Maintenance](https://img.shields.io/maintenance/yes/2022?logo=github&style=flat)
 
-# JOpenTDB
+# OmdbJava
 OmdbJava is an Easy to use and Light weight Omdb API wrapper for Java
 
 ### Version : 1.0.0
