@@ -1,11 +1,9 @@
-![JitPack](https://img.shields.io/jitpack/v/github/fero1xd/OmdbJava?color=green&label=Jitpack)
-![JitPack](https://img.shields.io/jitpack/v/github/fero1xd/OmdbJava?label=Build&logo=github&style=flat)
 ![Maintenance](https://img.shields.io/maintenance/yes/2022?logo=github&style=flat)
 
 # JOpenTDB
 OmdbJava is an Easy to use and Light weight Omdb API wrapper for Java
 
-### Version : 0.1.0
+### Version : 1.0.0
 
 ## Include library in your projects
 You can use Gradle or maven
@@ -23,7 +21,7 @@ allprojects {
 - Add the dependency
 ```gradle
 dependencies {
-	        implementation 'com.github.fero1xd:OmdbJava:0.1.0'
+	        implementation 'com.github.fero1xd:OmdbJava:1.0.0'
 	}
 ```
 
@@ -44,14 +42,13 @@ dependencies {
 	<dependency>
 	    <groupId>com.github.fero1xd</groupId>
 	    <artifactId>OmdbJava</artifactId>
-	    <version>0.1.0</version>
+	    <version>1.0.0</version>
 	</dependency>
 
 
 ```
 
 ### Jar
-Download the jar from this repo
 ```
 Use the Release Section
 ```
