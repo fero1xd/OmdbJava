@@ -63,7 +63,7 @@ public class OmdbJava {
      * @param type The type of item EG . Type.MOVIE
      * @param season The season number to get episodes for
      * @param episode The episode number
-     * @return The ResponseItem ... Can be Series, Movie
+     * @return The ResponseItem ... Can be Series, Movie, Episode, Season
      * @throws ResponseError if movie is not found
      */
     private Object getSingleItem(String id, String title, Plot plot, Type type, int season, int episode) throws ResponseError {
@@ -124,10 +124,11 @@ public class OmdbJava {
      * @param type The type of item EG . Type.MOVIE
      * @param handler The Class that Implements ItemFetched
      */
-    private void getSingleItemAsync(String id, String title, Plot plot, Type type, int season, int episode, ItemFetched handler) {
+    private <T extends Item> void getSingleItemAsync(String id, String title, Plot plot, Type type, int season, int episode,
+                                    ItemFetched<T> handler, Class<T> c) {
         new Thread(() -> {
             try {
-                Item singleItem = (Item) this.getSingleItem(id, title, plot, type, season, episode);
+                T singleItem = c.cast(this.getSingleItem(id, title, plot, type, season, episode));
                 handler.handle(singleItem);
                 return;
             } catch (ResponseError e) {
@@ -162,8 +163,8 @@ public class OmdbJava {
      * @param id The imdb id of the movie
      * @param handler The Class that Implements ItemFetched
      */
-    public void getMovieById(String id, ItemFetched handler) {
-        getSingleItemAsync(id,null, Plot.FULL, Type.MOVIE, -1, -1, handler);
+    public void getMovieById(String id, ItemFetched<Movie> handler) {
+        getSingleItemAsync(id,null, Plot.FULL, Type.MOVIE, -1, -1, handler, Movie.class);
     }
 
     /**
@@ -183,8 +184,8 @@ public class OmdbJava {
      * @param plot The plot . EG - Plot.FULL
      * @param handler The Class that Implements ItemFetched
      */
-    public void getMovieById(String id, Plot plot, ItemFetched handler) {
-        getSingleItemAsync(id, null, plot, Type.MOVIE,-1, -1,  handler);
+    public void getMovieById(String id, Plot plot, ItemFetched<Movie> handler) {
+        getSingleItemAsync(id, null, plot, Type.MOVIE,-1, -1,  handler, Movie.class);
     }
 
     /**
@@ -201,8 +202,8 @@ public class OmdbJava {
      * @param title The title of the movie
      * @param handler The Class that Implements ItemFetched
      */
-    public void getMovieByTitle(String title, ItemFetched handler) {
-        getSingleItemAsync(null, title, Plot.FULL, Type.MOVIE, -1, -1, handler);
+    public void getMovieByTitle(String title, ItemFetched<Movie> handler) {
+        getSingleItemAsync(null, title, Plot.FULL, Type.MOVIE, -1, -1, handler, Movie.class);
     }
 
 
@@ -222,9 +223,10 @@ public class OmdbJava {
      * @param plot The plot . EG - Plot.FULL
      * @param handler The Class that Implements ItemFetched
      */
-    public void getMovieByTitle(String title, Plot plot, ItemFetched handler) {
-        getSingleItemAsync(null, title, plot, Type.MOVIE,-1, -1,  handler);
+    public void getMovieByTitle(String title, Plot plot, ItemFetched<Movie> handler) {
+        getSingleItemAsync(null, title, plot, Type.MOVIE,-1, -1,  handler, Movie.class);
     }
+
 
     /**
      * Searches a movie
@@ -249,8 +251,8 @@ public class OmdbJava {
      * @param id The imdb id of the series
      * @param handler The Class that Implements ItemFetched
      */
-    public void getSeriesById(String id, ItemFetched handler) {
-        getSingleItemAsync(id, null, Plot.FULL, Type.SERIES, -1, -1, handler);
+    public void getSeriesById(String id, ItemFetched<Series> handler) {
+        getSingleItemAsync(id, null, Plot.FULL, Type.SERIES, -1, -1, handler, Series.class);
     }
 
     /**
@@ -269,8 +271,8 @@ public class OmdbJava {
      * @param plot The plot . EG - Plot.FULL
      * @param handler The Class that Implements ItemFetched
      */
-    public void getSeriesById(String id, Plot plot, ItemFetched handler) {
-        getSingleItemAsync(id, null, plot, Type.SERIES,-1, -1,  handler);
+    public void getSeriesById(String id, Plot plot, ItemFetched<Series> handler) {
+        getSingleItemAsync(id, null, plot, Type.SERIES,-1, -1,  handler, Series.class);
     }
 
 
@@ -288,8 +290,8 @@ public class OmdbJava {
      * @param title The title of the series
      * @param handler The Class that Implements ItemFetched
      */
-    public void getSeriesByTitle(String title, ItemFetched handler) {
-        getSingleItemAsync(null, title, Plot.FULL, Type.SERIES, -1, -1, handler);
+    public void getSeriesByTitle(String title, ItemFetched<Series> handler) {
+        getSingleItemAsync(null, title, Plot.FULL, Type.SERIES, -1, -1, handler, Series.class);
     }
 
     /**
@@ -308,8 +310,8 @@ public class OmdbJava {
      * @param plot The plot . EG - Plot.FULL
      * @param handler The Class that Implements ItemFetched
      */
-    public void getSeriesByTitle(String title, Plot plot, ItemFetched handler) {
-        getSingleItemAsync(null, title, plot, Type.SERIES,-1, -1,  handler);
+    public void getSeriesByTitle(String title, Plot plot, ItemFetched<Series> handler) {
+        getSingleItemAsync(null, title, plot, Type.SERIES,-1, -1,  handler, Series.class);
     }
 
     /**

@@ -18,7 +18,7 @@ repositories {
 
 sourceCompatibility = "1.8"
 targetCompatibility = "1.8"
-
+archivesBaseName = "OmdbJava"
 dependencies {
     // JSONParser
     implementation group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1'

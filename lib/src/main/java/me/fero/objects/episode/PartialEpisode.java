@@ -9,7 +9,6 @@ public class PartialEpisode {
     private final String imdbRating;
     private final String imdbId;
 
-
     public PartialEpisode(JSONObject jsonObject) {
         this.title = jsonObject.get("Title").toString();
         this.released = jsonObject.get("Released").toString();
@@ -37,5 +36,4 @@ public class PartialEpisode {
     public String getImdbId() {
         return imdbId;
     }
-
 }
