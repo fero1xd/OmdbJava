@@ -3,7 +3,7 @@
 # OmdbJava
 OmdbJava is an Easy to use and Light weight Omdb API wrapper for Java
 
-### Version : 1.0.1
+### Version : 1.0.2
 
 ## Include library in your projects
 You can use Gradle or maven
