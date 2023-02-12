@@ -21,7 +21,7 @@ allprojects {
 - Add the dependency
 ```gradle
 dependencies {
-	        implementation 'com.github.fero1xd:OmdbJava:1.0.1'
+	        implementation 'com.github.fero1xd:OmdbJava:1.0.2'
 	}
 ```
 
