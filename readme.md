@@ -67,11 +67,11 @@ public class App {
         
         // Find movie with title (Synchronous)
         try {
-            Movie turning_red = omdbJava.getMovieByTitle("Turning Red");
+            Movie movie = omdbJava.getMovieByTitle("Turning Red");
             
-            System.out.println(turning_red.getTitle());
-            System.out.println(turning_red.getPlot());
-            System.out.println(turning_red.getActors());
+            System.out.println(movie.getTitle());
+            System.out.println(movie.getPlot());
+            System.out.println(movie.getActors());
         } catch (ResponseError e) {
             e.printStackTrace();
         }
@@ -92,10 +92,8 @@ public class App {
         OmdbJava omdbJava = new OmdbJava("YOUR_API_KEY");
         
         // Find movie with title (Asynchronous)
-        omdbJava.getMovieByTitle("Turning Red", (Item item) -> {
-            if(item == null) return;
-
-            Movie movie = (Movie) item;
+        omdbJava.getMovieByTitle("Turning Red", (Movie movie) -> {
+            if(movie == null) return;
 
             System.out.println(movie.getTitle());
             System.out.println(movie.getPlot());
