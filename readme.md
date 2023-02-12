@@ -1,4 +1,4 @@
-![Maintenance](https://img.shields.io/maintenance/yes/2022?logo=github&style=flat)
+![Maintenance](https://img.shields.io/maintenance/yes/2023?logo=github&style=flat)
 
 # OmdbJava
 OmdbJava is an Easy to use and Light weight Omdb API wrapper for Java
