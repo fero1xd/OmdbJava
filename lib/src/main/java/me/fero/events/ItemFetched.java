@@ -1,9 +1,8 @@
 package me.fero.events;
 
-import me.fero.objects.Item;
-
 import javax.annotation.Nullable;
 
-public interface ItemFetched<T extends Item> {
+public interface ItemFetched<T> {
    void handle(@Nullable T item);
 }
+

@@ -24,6 +24,8 @@ public class OmdbJava {
 
     private String apiKey;
 
+    private boolean log;
+
     /**
      * Default constructor
      */
@@ -40,6 +42,7 @@ public class OmdbJava {
         }
 
         this.apiKey = apiKey;
+        this.log = false;
     }
 
 
@@ -52,6 +55,14 @@ public class OmdbJava {
             throw new IllegalArgumentException("Api key cannot be empty");
         }
         this.apiKey = apiKey;
+    }
+
+    /**
+     * Sets logging mode
+     * @param logging The new state of logging
+     */
+    public void setLogging(boolean logging) {
+        this.log = logging;
     }
 
 
@@ -76,6 +87,10 @@ public class OmdbJava {
             if(id != null) url += "&i=" + id;
             if(season > -1) url += "&season=" + season;
             if(episode > -1) url += "&episode=" + episode;
+
+            if(this.log) {
+                System.out.println("[+] Requesting at url: " + url);
+            }
 
             Response response = IO.request(url);
             if(response.getCode() == 1) {
@@ -124,7 +139,7 @@ public class OmdbJava {
      * @param type The type of item EG . Type.MOVIE
      * @param handler The Class that Implements ItemFetched
      */
-    private <T extends Item> void getSingleItemAsync(String id, String title, Plot plot, Type type, int season, int episode,
+    private <T> void getSingleItemAsync(String id, String title, Plot plot, Type type, int season, int episode,
                                     ItemFetched<T> handler, Class<T> c) {
         new Thread(() -> {
             try {
@@ -146,6 +161,9 @@ public class OmdbJava {
      */
     private Iterator search(String search, Type type) throws UnsupportedEncodingException {
         String url = Config.baseUrl + "/?apikey=" + apiKey + "&s=" +  URLEncoder.encode(search, "UTF-8") + "&type=" + type.name().toLowerCase() + "&r=json" + "&v=1";
+        if(this.log) {
+            System.out.println("[+] Searching at " + url);
+        }
         return new Iterator(url, type);
     }
 
@@ -336,12 +354,30 @@ public class OmdbJava {
 
     /**
      * Gets Season of a series
-     * @param title The title  of the series
+     * @param title The title of the series
      * @param season The season of the series
      * @return A season object containing Partial Episodes
      */
     public Season getSeasonByTitle(String title, int season) throws ResponseError {
         return (Season) this.getSingleItem(null, title, null, Type.SEASON, season, -1);
+    }
+
+    /**
+     * Gets Season of a series (asynchronously)
+     * @param id The imdb id of the series
+     * @param season The season of the series
+     */
+    public void getSeasonById(String id, int season, ItemFetched<Season> handler) throws ResponseError {
+        this.getSingleItemAsync(id, null, null, Type.SEASON, season, -1, handler, Season.class);
+    }
+
+    /**
+     * Gets Season of a series (asynchronously)
+     * @param title The title of the series
+     * @param season The season of the series
+     */
+    public void getSeasonByTitle(String title, int season, ItemFetched<Season> handler) throws ResponseError {
+        this.getSingleItemAsync(null, title, null, Type.SEASON, season, -1, handler, Season.class);
     }
 
 
@@ -352,5 +388,14 @@ public class OmdbJava {
      */
     public Episode getEpisodeById(String id) throws ResponseError {
         return (Episode) this.getSingleItem(id, null, null, Type.EPISODE, -1, -1);
+    }
+
+
+    /**
+     * Gets a single episode by id (asynchronously)
+     * @param id The id of the episode
+     */
+    public void getEpisodeById(String id, ItemFetched<Episode> handler) throws ResponseError {
+        getSingleItemAsync(id, null, null, Type.EPISODE, -1, -1, handler, Episode.class);
     }
 }
