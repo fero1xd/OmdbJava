@@ -3,7 +3,7 @@
 # OmdbJava
 OmdbJava is an Easy to use and Light weight Omdb API wrapper for Java
 
-### Version : 1.0.2
+### Version : 1.0.3
 
 ## Include library in your projects
 You can use Gradle or maven
@@ -21,7 +21,7 @@ allprojects {
 - Add the dependency
 ```gradle
 dependencies {
-	        implementation 'com.github.fero1xd:OmdbJava:1.0.2'
+	        implementation 'com.github.fero1xd:OmdbJava:1.0.3'
 	}
 ```
 
@@ -42,7 +42,7 @@ dependencies {
 	<dependency>
 	    <groupId>com.github.fero1xd</groupId>
 	    <artifactId>OmdbJava</artifactId>
-	    <version>1.0.1</version>
+	    <version>1.0.3</version>
 	</dependency>
 
 
